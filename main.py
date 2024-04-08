@@ -6,6 +6,7 @@ import time
 import os
 import json
 import redis
+import platform
 from pprint import pprint
 from threading import Thread
 from TimePinner import Pinner
@@ -13,7 +14,7 @@ from DrissionPage import ChromiumPage
 from DrissionPage.common import Keys
 from DrissionPage._units.actions import Actions
 from DrissionPage._configs.chromium_options import ChromiumOptions
-
+SYS_ENV = platform.system()
 database_redis = {
     'host': '103.242.3.43',  # 公网
     'port': 1968,
@@ -248,8 +249,11 @@ def run(page):
 
 
 if __name__ == '__main__':
-    path = "/usr/bin/microsoft-edge"
-    co = ChromiumOptions().set_browser_path(path)
+    if SYS_ENV == "Windows":
+        co = ChromiumOptions()
+    else:
+        path = "/usr/bin/microsoft-edge"
+        co = ChromiumOptions().set_browser_path(path)
     co.headless(True)
     # 用 d 模式创建页面对象（默认模式）
     page1 = ChromiumPage(co)
