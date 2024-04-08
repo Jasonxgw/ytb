@@ -248,7 +248,8 @@ def run(page):
 
 
 if __name__ == '__main__':
-    co = ChromiumOptions()
+    path = "/usr/bin/microsoft-edge"
+    co = ChromiumOptions().set_browser_path(path)
     co.headless(True)
     # 用 d 模式创建页面对象（默认模式）
     page1 = ChromiumPage(co)
