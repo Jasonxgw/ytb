@@ -20,3 +20,4 @@ RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 # 下载edge deb
 #RUN wget https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_123.0.2420.81-1_amd64.deb
 #RUN dpkg -i microsoft-edge-stable_123.0.2420.81-1_amd64.deb
+CMD /usr/local/bin/python main.py

@@ -171,8 +171,9 @@ def get_user_info(url, page):
     if '评论已关闭' in str(page.html) or '此视频无法再播放' in str(page.html):
         return
     num = 0
-    page.scroll.to_bottom() # 防止没有评论的视频，卡死程序
+    page.scroll.to_bottom()  # 防止没有评论的视频，卡死程序
     while True:
+        print(page.url)
         packet = page.listen.wait()  # 等待数据包
         time.sleep(1)
         page.scroll.to_bottom()
@@ -257,7 +258,7 @@ if __name__ == '__main__':
     co.headless(True)
     # 用 d 模式创建页面对象（默认模式）
     page1 = ChromiumPage(co)
-    # page2 = ChromiumPage(co)
+    page2 = ChromiumPage(co)
 
     Thread(target=run, args=(page1,)).start()
-    # Thread(target=run, args=(page2,)).start()
+    Thread(target=run, args=(page2,)).start()
