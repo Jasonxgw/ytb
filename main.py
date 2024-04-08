@@ -252,7 +252,7 @@ if __name__ == '__main__':
     if SYS_ENV == "Windows":
         co = ChromiumOptions()
     else:
-        path = "/usr/bin/microsoft-edge"
+        path = "/opt/google/chrome/google-chrome"
         co = ChromiumOptions().set_browser_path(path)
     co.headless(True)
     # 用 d 模式创建页面对象（默认模式）
