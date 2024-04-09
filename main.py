@@ -250,7 +250,7 @@ if __name__ == '__main__':
     else:
         path = "/opt/google/chrome/google-chrome"
         co = ChromiumOptions().auto_port().set_browser_path(path)
-    # co.headless(True)
+    co.headless(True)
     # 用 d 模式创建页面对象（默认模式）
     page1 = ChromiumPage(co)
     page2 = ChromiumPage(co)
