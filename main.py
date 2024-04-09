@@ -251,10 +251,10 @@ def run(page):
 
 if __name__ == '__main__':
     if SYS_ENV == "Windows":
-        co = ChromiumOptions()
+        co = ChromiumOptions().auto_port()
     else:
         path = "/opt/google/chrome/google-chrome"
-        co = ChromiumOptions().set_browser_path(path)
+        co = ChromiumOptions().auto_port().set_browser_path(path)
     co.headless(True)
     # 用 d 模式创建页面对象（默认模式）
     page1 = ChromiumPage(co)
