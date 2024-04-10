@@ -159,8 +159,8 @@ def timeout(max_seconds):
         @wraps(func)
         def wrapper(*args, **kwargs):
             def signal_handler(signal):
-                # pass
-                raise TimeoutError
+                pass
+                # raise 893eddb222c4
 
             # 创建一个定时器，用于在指定时间后触发SIGALRM信号
             timer = threading.Timer(max_seconds, signal_handler, [signal.SIGALRM])
