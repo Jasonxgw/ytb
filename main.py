@@ -169,7 +169,7 @@ def get_user_info(url, page):
             RedisList('video').InsertData(f"https://www.youtube.com/watch?v={i[:11]}")
     time.sleep(1)
     if '评论已关闭' in str(page.html) or '此视频无法再播放' in str(page.html) or '直播' in str(page.html) \
-            or "已關閉留言功能" in str(page.html):
+            or "已關閉留言功能" in str(page.html) or "正在觀看" in str(page.html):
         print(f"过滤视频：{page.url}")
         return
     page.scroll.to_bottom()  # 防止没有评论的视频，卡死程序
