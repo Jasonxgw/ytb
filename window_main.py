@@ -14,6 +14,7 @@ from DrissionPage import ChromiumPage
 from DrissionPage.common import Keys
 from DrissionPage._units.actions import Actions
 from DrissionPage._configs.chromium_options import ChromiumOptions
+
 SYS_ENV = platform.system()
 database_redis = {
     'host': '103.242.3.43',  # 公网
@@ -157,6 +158,11 @@ class RedisSet(RedisDB):
         return self.conn.spop(self.key)
 
 
+def save_txt(data):
+    with open(f'{time.time() * 1000}.html', 'r')as f:
+        f.write(data)
+
+
 def get_user_info(url, page):
     # 跳转到登录页面
     page.listen.start('/youtubei/v1/next')  # 指定监听目标并启动监听
@@ -168,16 +174,17 @@ def get_user_info(url, page):
                 continue
             RedisList('video').InsertData(f"https://www.youtube.com/watch?v={i[:11]}")
     time.sleep(1)
+    save_txt(page.html)
     if '评论已关闭' in str(page.html) or '此视频无法再播放' in str(page.html) or '直播' in str(page.html) \
             or "已關閉留言功能" in str(page.html) or "人正在觀看" in str(page.html):
         print(f"过滤视频：{page.url}")
         return
     page.scroll.to_bottom()  # 防止没有评论的视频，卡死程序
     print(page.url)
-    packet = page.listen.wait()  # 等待数据包
     time.sleep(1)
     page.scroll.to_bottom()
     time.sleep(1)
+    packet = page.listen.wait()  # 等待数据包
     if packet.response.body is None:
         return
     handle_response(packet.response.body)  # 打印数据包正文

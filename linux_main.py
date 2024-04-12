@@ -200,10 +200,10 @@ def get_user_info(url, page):
         return
     page.scroll.to_bottom()  # 防止没有评论的视频，卡死程序
     print(page.url)
-    packet = page.listen.wait()  # 等待数据包
     time.sleep(1)
     page.scroll.to_bottom()
     time.sleep(1)
+    packet = page.listen.wait()  # 等待数据包
     if packet.response.body is None:
         return
     handle_response(packet.response.body)  # 打印数据包正文
