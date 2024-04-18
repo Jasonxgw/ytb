@@ -14,10 +14,10 @@ from DrissionPage._configs.chromium_options import ChromiumOptions
 SYS_ENV = platform.system()
 database_redis = {
     'host': '103.242.3.43',  # 公网
-    'port': 1968,
-    'user': '',
-    'password': '',
-    'db': '0'
+    'port': 6379,
+    'user': 'root',
+    'password': 'jhkdjhkjdhsIUTYURTU_Bdn7Sw',
+    'db': '2'
 }
 
 Pool = redis.ConnectionPool(host=database_redis['host'],
