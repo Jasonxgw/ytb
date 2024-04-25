@@ -135,6 +135,9 @@ class RedisList(RedisDB):
     def delete_all(self, key):
         return self.conn.lrange(key, 0, -1)
 
+    def ltrim(self):
+        return self.conn.ltrim(self.key, 0, 100)  # 限制101为长度
+
 
 class RedisSet(RedisDB):
 
@@ -232,6 +235,7 @@ def run(page):
             if RedisSet("video_id").is_exist(video_id):
                 continue
             RedisSet("video_id").s_add(video_id)
+            RedisList('video').ltrim()  # 限制list中的长度
             get_user_info(url, page)
         except Exception as e:
             continue
